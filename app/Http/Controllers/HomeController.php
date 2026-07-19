@@ -2,30 +2,52 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HeroSlide;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
+
 class HomeController extends Controller
 {
     public function index()
     {
-        $categories = \App\Services\PerformanceCacheService::getMainCategories()
-            ->filter(fn ($category) => ($category->active_products_count ?? 0) > 0)
-            ->take(8);
-
-        $promoDeals = \App\Services\PerformanceCacheService::getPromotionProducts(null, 4);
+        $promoDeals = \App\Services\PerformanceCacheService::getPromotionProducts(null, 10);
         $categorySections = \App\Services\PerformanceCacheService::getHomepageProductsByCategory(5);
         $heroSlides = $this->resolveHeroSlides($promoDeals);
 
-        return view('home', compact('categories', 'promoDeals', 'categorySections', 'heroSlides'));
+        return view('home', compact('promoDeals', 'categorySections', 'heroSlides'));
     }
 
     private function resolveHeroSlides($promoDeals)
     {
+        try {
+            if (class_exists(HeroSlide::class) && Schema::hasTable('hero_slides')) {
+                $dbSlides = HeroSlide::active()->ordered()->get();
+
+                if ($dbSlides->isNotEmpty()) {
+                    return $dbSlides->map(function (HeroSlide $slide) {
+                        return [
+                            'image' => $slide->image_url,
+                            'url' => $slide->link_url ?: null,
+                            'alt' => $slide->alt_text ?: ($slide->title ?: 'Chance Laptops'),
+                        ];
+                    })->values();
+                }
+            }
+        } catch (\Throwable $e) {
+            Log::warning('Hero slides unavailable: '.$e->getMessage());
+        }
+
         $slides = collect(config('homepage.hero_slides', []))
-            ->filter(fn ($slide) => ! empty($slide['image']) && file_exists(public_path($slide['image'])))
-            ->map(fn ($slide) => [
-                'image' => asset($slide['image']),
-                'url' => ! empty($slide['route']) ? route($slide['route']) : null,
-                'alt' => $slide['alt'] ?? 'Chance Laptops',
-            ])
+            ->filter(function ($slide) {
+                return ! empty($slide['image']) && file_exists(public_path($slide['image']));
+            })
+            ->map(function ($slide) {
+                return [
+                    'image' => asset($slide['image']),
+                    'url' => ! empty($slide['route']) ? route($slide['route']) : null,
+                    'alt' => $slide['alt'] ?? 'Chance Laptops',
+                ];
+            })
             ->values();
 
         if ($slides->isNotEmpty()) {

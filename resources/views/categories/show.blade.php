@@ -22,37 +22,6 @@
             </ol>
         </nav>
         
-        <!-- Chance Laptops Banner (Show only for laptop-related categories) -->
-        @if(str_contains(strtolower($category->name), 'laptop'))
-        <div class="mb-3 md:mb-4 category-brand-banner rounded-xl p-3 md:p-4">
-            <div class="flex items-center justify-between gap-3">
-                <div class="flex items-center gap-3 flex-1 min-w-0">
-                    <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center flex-shrink-0 shadow-md shadow-red-500/20">
-                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M20,18C20.5,18 21,17.5 21,17V7C21,6.5 20.5,6 20,6H4C3.5,6 3,6.5 3,7V17C3,17.5 3.5,18 4,18H1V20H23V18M5,8H19V16H5V8Z"/>
-                        </svg>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex items-center gap-2 mb-0.5 flex-wrap">
-                            <h3 class="text-sm md:text-base font-bold text-red-700 truncate">CHANCE LAPTOPS</h3>
-                            <span class="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">Official</span>
-                        </div>
-                        <p class="text-xs text-slate-600 truncate">Your trusted partner for all computer needs</p>
-                        <p class="text-xs text-slate-500 truncate hidden sm:block">Repairs · Upgrades · Sales · Service</p>
-                    </div>
-                </div>
-                <a href="https://chancelaptops.com/"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="inline-flex items-center gap-1.5 px-3 py-2 bg-white border border-red-200 text-red-700 text-xs font-semibold rounded-lg hover:bg-red-50 hover:border-red-300 transition-all shadow-sm flex-shrink-0">
-                    <span class="hidden sm:inline">Visit store</span>
-                    <span class="sm:hidden">Visit</span>
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                </a>
-            </div>
-        </div>
-        @endif
-        
         <div class="flex items-center justify-between">
             <!-- Category Info -->
             <div class="flex items-center gap-3 md:gap-4 min-w-0 flex-1">
@@ -106,6 +75,34 @@
                             <input type="text" name="search" id="search" value="{{ request('search') }}" 
                                    placeholder="Search by name, code..." 
                                    class="w-full bg-gray-100 border border-gray-300 text-gray-900 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-[blue-500] focus:border-[blue-500] transition-all">
+                        </div>
+
+                        <!-- Availability -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Availability</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center cursor-pointer hover:bg-gray-100 rounded p-2 transition-colors">
+                                    <input type="checkbox" name="in_stock" value="1"
+                                           {{ request()->boolean('in_stock') ? 'checked' : '' }}
+                                           class="w-4 h-4 text-emerald-600 bg-gray-100 border-slate-200 rounded focus:ring-emerald-500 focus:ring-2">
+                                    <span class="ml-3 text-sm text-gray-700 flex-1">In Stock</span>
+                                    <span class="w-2 h-2 rounded-full bg-emerald-500" title="Local stock"></span>
+                                </label>
+                                <label class="flex items-center cursor-pointer hover:bg-gray-100 rounded p-2 transition-colors">
+                                    <input type="checkbox" name="wholesale" value="1"
+                                           {{ request()->boolean('wholesale') ? 'checked' : '' }}
+                                           class="w-4 h-4 text-amber-600 bg-gray-100 border-slate-200 rounded focus:ring-amber-500 focus:ring-2">
+                                    <span class="ml-3 text-sm text-gray-700 flex-1">Wholesale</span>
+                                    <span class="w-2 h-2 rounded-full bg-amber-500" title="Wholesale"></span>
+                                </label>
+                                <label class="flex items-center cursor-pointer hover:bg-gray-100 rounded p-2 transition-colors">
+                                    <input type="checkbox" name="in_stock_uae" value="1"
+                                           {{ request()->boolean('in_stock_uae') ? 'checked' : '' }}
+                                           class="w-4 h-4 text-sky-600 bg-gray-100 border-slate-200 rounded focus:ring-sky-500 focus:ring-2">
+                                    <span class="ml-3 text-sm text-gray-700 flex-1">In Stock UAE</span>
+                                    <span class="w-2 h-2 rounded-full bg-sky-500" title="In Stock UAE"></span>
+                                </label>
+                            </div>
                         </div>
 
                         <!-- Price Range -->
@@ -255,26 +252,8 @@
                                 loading="lazy"
                             >
                             
-                            <!-- Stock Badge -->
-                            @if($product->status && in_array($product->status->status_name, ['Coming Soon', 'Pre Order']))
-                                <div class="absolute top-3 left-3 bg-[#E30613] text-white text-xs font-medium px-2.5 py-1 rounded-lg backdrop-blur-sm">
-                                    {{ strtoupper($product->status->status_name) }}
-                                </div>
-                            @elseif($product->stock_quantity > 0)
-                                <div class="absolute top-3 left-3 bg-[#34d399] text-white text-xs font-medium px-2.5 py-1 rounded-lg backdrop-blur-sm">
-                                    IN STOCK
-                                </div>
-                            @else
-                                <div class="absolute top-3 left-3 bg-[#ef4444] text-white text-xs font-medium px-2.5 py-1 rounded-lg backdrop-blur-sm">
-                                    OUT OF STOCK
-                                </div>
-                            @endif
-
-                            @if($product->is_on_sale)
-                                <div class="absolute top-3 right-3 bg-[blue-500] text-white text-xs font-bold px-2.5 py-1 rounded-lg backdrop-blur-sm">
-                                    SALE
-                                </div>
-                            @endif
+                            <!-- Badges -->
+                            <x-product-grid-flags :product="$product" />
                         </div>
                         
                         <!-- Product Info -->
@@ -308,15 +287,26 @@
                                 </div>
                             @endif
                             
-                            <x-payment-badges />
+                            @if($product->can_add_to_cart)
+                                <x-payment-badges />
+                            @endif
                             
                             <div class="mt-auto pt-3">
-                                <x-add-to-cart-button
-                                    :product-id="$product->id"
-                                    :disabled="!$product->can_add_to_cart"
-                                    :reason="$product->cart_restriction_reason ?: 'Unavailable'"
-                                    size="sm"
-                                />
+                                @if($product->can_add_to_cart)
+                                    <x-add-to-cart-button
+                                        :product-id="$product->id"
+                                        :disabled="false"
+                                        size="sm"
+                                    />
+                                @else
+                                    <span class="block w-full text-center text-xs font-semibold rounded-lg py-2.5 {{ ($product->is_wholesale || $product->is_in_stock_uae) ? 'bg-sky-600 text-white' : 'bg-gray-200 text-gray-600' }}">
+                                        @if($product->is_wholesale || $product->is_in_stock_uae)
+                                            View · WhatsApp purchase
+                                        @else
+                                            {{ $product->cart_restriction_reason ?: 'Unavailable' }}
+                                        @endif
+                                    </span>
+                                @endif
                             </div>
                         </div>
                     </a>
@@ -745,14 +735,25 @@
             let gridHTML = '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">';
             
             products.forEach(product => {
+                let leftBadges = '<div class="absolute top-3 left-3 z-10 flex flex-col gap-1">';
+                if (product.is_on_sale) {
+                    leftBadges += '<span class="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">SALE</span>';
+                }
+                if (product.is_wholesale) {
+                    leftBadges += '<span class="bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">Wholesale</span>';
+                }
+                leftBadges += '</div>';
+
                 let stockBadge = '';
                 if (product.stock_quantity > 0) {
-                    stockBadge = '<div class="absolute top-3 left-3 bg-[#34d399] text-white text-xs font-medium px-2.5 py-1 rounded-lg backdrop-blur-sm">IN STOCK</div>';
+                    stockBadge = '<div class="absolute top-3 right-3 bg-emerald-500 text-white text-xs font-medium px-2.5 py-1 rounded-lg">In Stock</div>';
+                } else if (product.is_in_stock_uae) {
+                    stockBadge = '<div class="absolute top-3 right-3 bg-sky-600 text-white text-xs font-medium px-2.5 py-1 rounded-lg">In Stock UAE</div>';
                 } else {
-                    stockBadge = '<div class="absolute top-3 left-3 bg-[#ef4444] text-white text-xs font-medium px-2.5 py-1 rounded-lg backdrop-blur-sm">OUT OF STOCK</div>';
+                    stockBadge = '<div class="absolute top-3 right-3 bg-red-500 text-white text-xs font-medium px-2.5 py-1 rounded-lg">Out of Stock</div>';
                 }
 
-                let saleBadge = product.is_on_sale ? '<div class="absolute top-3 right-3 bg-[blue-500] text-white text-xs font-bold px-2.5 py-1 rounded-lg backdrop-blur-sm">SALE</div>' : '';
+                let saleBadge = '';
                 
                 let priceHTML = '';
                 if (product.is_on_sale) {
@@ -770,11 +771,15 @@
                 const categorySlug = product.category?.slug || product.category?.id || 'uncategorized';
                 const productSlug = product.slug || product.id;
                 const productUrl = `/${categorySlug}/${productSlug}`;
+                const actionBtn = (product.can_add_to_cart || product.stock_quantity > 0)
+                    ? `<button type="button" data-add-to-cart onclick="event.preventDefault(); event.stopPropagation(); addToCart(${product.id})" class="btn-add-to-cart w-full btn-add-to-cart--sm"><span class="btn-add-to-cart__icon-wrap" aria-hidden="true"><svg class="btn-add-to-cart__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg></span><span class="btn-add-to-cart__text">Add to Cart</span><span class="btn-add-to-cart__loader" aria-hidden="true"><svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></span></button>`
+                    : `<span class="block w-full text-center text-xs font-semibold rounded-lg py-2.5 ${(product.is_wholesale || product.is_in_stock_uae) ? 'bg-sky-600 text-white' : 'bg-gray-200 text-gray-600'}">${(product.is_wholesale || product.is_in_stock_uae) ? 'View · WhatsApp purchase' : (product.cart_restriction_reason || 'Unavailable')}</span>`;
                 
                 gridHTML += `
                     <a href="${productUrl}" class="product-card block bg-white rounded-xl border border-gray-200/30 overflow-hidden hover:border-[blue-500]/30 transition-all duration-300 group shadow-lg hover:shadow-xl hover:shadow-[blue-500]/10 cursor-pointer">
                         <div class="relative overflow-hidden bg-white aspect-[4/3]">
                             <img src="${product.main_image}" alt="${product.name}" class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105 p-6 bg-white/5 rounded-lg" loading="lazy">
+                            ${leftBadges}
                             ${stockBadge}
                             ${saleBadge}
                         </div>
@@ -788,21 +793,8 @@
                             <div class="flex items-center justify-between mb-4">
                                 <div class="flex flex-col">${priceHTML}</div>
                             </div>
-                            <div class="payment-badges mt-2 mb-2">
-                                <span class="payment-badge payment-badge--koko" title="KOKO Pay — Buy Now Pay Later">
-                                    <img src="{{ asset('images/kokopay-logo.png') }}" alt="" class="payment-badge__icon" width="16" height="16" loading="lazy">
-                                    <span>KOKO Pay</span>
-                                </span>
-                                <span class="payment-badge payment-badge--installments" title="Installment plans available">
-                                    <svg class="payment-badge__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-                                    <span>Installments</span>
-                                </span>
-                            </div>
                             <div class="mt-auto">
-                                ${product.stock_quantity > 0 
-                                    ? `<button type="button" data-add-to-cart onclick="event.preventDefault(); event.stopPropagation(); addToCart(${product.id})" class="btn-add-to-cart w-full btn-add-to-cart--sm"><span class="btn-add-to-cart__icon-wrap" aria-hidden="true"><svg class="btn-add-to-cart__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg></span><span class="btn-add-to-cart__text">Add to Cart</span><span class="btn-add-to-cart__loader" aria-hidden="true"><svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></span></button>`
-                                    : `<button type="button" disabled class="btn-add-to-cart btn-add-to-cart--disabled w-full btn-add-to-cart--sm"><span>Out of Stock</span></button>`
-                                }
+                                ${actionBtn}
                             </div>
                         </div>
                     </a>

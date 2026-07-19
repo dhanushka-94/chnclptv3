@@ -297,8 +297,7 @@
                         <h4 class="text-gray-900 font-medium mb-2">Send to:</h4>
                         <div class="text-gray-700 text-sm space-y-1">
                             <p><strong>Chance Laptops</strong></p>
-                            <p>296/3/C, Delpe Junction, Ragama</p>
-                            <p>Ragama, Sri Lanka</p>
+                            <p class="text-gray-600">Contact us before sending courier items:</p>
                             <div class="mt-3 space-y-1">
                                 <p>076 444 222 1</p>
                                 <p>011 296 066 0</p>

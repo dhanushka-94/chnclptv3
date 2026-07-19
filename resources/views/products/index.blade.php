@@ -27,17 +27,54 @@
                     <div class="mb-6">
                         <h4 class="text-md font-medium text-primary-400 mb-3">Categories</h4>
                         <div class="space-y-2">
-                            <a href="{{ route('products.index') }}" 
+                            <a href="{{ route('products.index', request()->except('category', 'page')) }}" 
                                class="block py-2 px-3 rounded {{ !request('category') ? 'filter-active' : 'text-gray-700 hover:text-primary-600 hover:bg-red-50' }}">
                                 All Products
                             </a>
                             @foreach($categories as $category)
-                                <a href="{{ route('products.index', ['category' => $category->slug]) }}" 
+                                <a href="{{ route('products.index', array_merge(request()->except('page'), ['category' => $category->slug])) }}" 
                                    class="block py-2 px-3 rounded {{ request('category') == $category->slug ? 'filter-active' : 'text-gray-700 hover:text-primary-600 hover:bg-red-50' }}">
                                     {{ $category->name }}
                                 </a>
                             @endforeach
                         </div>
+                    </div>
+
+                    <!-- Availability -->
+                    <div class="mb-6">
+                        <h4 class="text-md font-medium text-primary-400 mb-3">Availability</h4>
+                        <form method="GET" action="{{ route('products.index') }}" id="availabilityForm" class="space-y-2">
+                            @if(request('category'))
+                                <input type="hidden" name="category" value="{{ request('category') }}">
+                            @endif
+                            @if(request('search'))
+                                <input type="hidden" name="search" value="{{ request('search') }}">
+                            @endif
+                            @if(request('sort'))
+                                <input type="hidden" name="sort" value="{{ request('sort') }}">
+                            @endif
+                            <label class="flex items-center cursor-pointer hover:bg-red-50 rounded px-3 py-2 transition-colors">
+                                <input type="checkbox" name="in_stock" value="1"
+                                       {{ request()->boolean('in_stock') ? 'checked' : '' }}
+                                       onchange="document.getElementById('availabilityForm').submit()"
+                                       class="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500">
+                                <span class="ml-3 text-sm text-gray-700">In Stock</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer hover:bg-red-50 rounded px-3 py-2 transition-colors">
+                                <input type="checkbox" name="wholesale" value="1"
+                                       {{ request()->boolean('wholesale') ? 'checked' : '' }}
+                                       onchange="document.getElementById('availabilityForm').submit()"
+                                       class="w-4 h-4 text-amber-600 border-gray-300 rounded focus:ring-amber-500">
+                                <span class="ml-3 text-sm text-gray-700">Wholesale</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer hover:bg-red-50 rounded px-3 py-2 transition-colors">
+                                <input type="checkbox" name="in_stock_uae" value="1"
+                                       {{ request()->boolean('in_stock_uae') ? 'checked' : '' }}
+                                       onchange="document.getElementById('availabilityForm').submit()"
+                                       class="w-4 h-4 text-sky-600 border-gray-300 rounded focus:ring-sky-500">
+                                <span class="ml-3 text-sm text-gray-700">In Stock UAE</span>
+                            </label>
+                        </form>
                     </div>
 
                     <!-- Sort Options -->
@@ -49,6 +86,15 @@
                             @endif
                             @if(request('search'))
                                 <input type="hidden" name="search" value="{{ request('search') }}">
+                            @endif
+                            @if(request()->boolean('in_stock'))
+                                <input type="hidden" name="in_stock" value="1">
+                            @endif
+                            @if(request()->boolean('wholesale'))
+                                <input type="hidden" name="wholesale" value="1">
+                            @endif
+                            @if(request()->boolean('in_stock_uae'))
+                                <input type="hidden" name="in_stock_uae" value="1">
                             @endif
                             <select name="sort" class="input-field w-full" onchange="document.getElementById('sortForm').submit()">
                                 <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Latest</option>
@@ -91,22 +137,8 @@
                                     </a>
                                     
                                     <!-- Badges -->
-                                    <div class="absolute top-2 left-2 flex flex-col gap-1">
-                                        @if($product->is_featured)
-                                            <span class="badge-new">FEATURED</span>
-                                        @endif
-                                        @if($product->is_on_sale)
-                                            <span class="badge-sale">SALE</span>
-                                        @endif
-                                    </div>
-                                    
-                                    <!-- Stock Status -->
-                                    <div class="absolute top-2 right-2">
-                                        @if($product->stock_quantity > 0)
-                                            <span class="badge-stock">In Stock</span>
-                                        @else
-                                            <span class="badge-out-of-stock">Out of Stock</span>
-                                        @endif
+                                    <div class="absolute inset-0">
+                                        <x-product-grid-flags :product="$product" />
                                     </div>
                                 </div>
                                 

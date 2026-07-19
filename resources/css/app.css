@@ -575,12 +575,6 @@
         transition: all 0.2s ease;
     }
 
-    .category-brand-banner {
-        background: linear-gradient(135deg, #fef2f2 0%, #ffffff 50%, #fee2e2 100%);
-        border: 1px solid #fecaca;
-        box-shadow: 0 4px 16px rgba(196, 5, 16, 0.08);
-    }
-
     /* ---- Cart page ---- */
     .cart-page {
         background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);

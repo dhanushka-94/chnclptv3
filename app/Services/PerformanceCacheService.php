@@ -115,10 +115,13 @@ class PerformanceCacheService
         
         return Cache::remember($cacheKey, self::CACHE_DURATION, function () use ($categoryId, $limit) {
             $query = SmaProduct::active()
-                ->select(['id', 'name', 'price', 'promo_price', 'quantity', 'category_id', 'subcategory_id', 'product_status', 'image', 'promotion'])
+                ->select(['id', 'name', 'price', 'promo_price', 'quantity', 'category_id', 'subcategory_id', 'product_status', 'image', 'promotion', 'slug', 'wholesale', 'in_stock_uae', 'start_date', 'end_date'])
                 ->where('promotion', 1)
                 ->where('promo_price', '>', 0)
-                ->where('quantity', '>', 0)
+                ->where(function ($q) {
+                    $q->where('quantity', '>', 0)
+                      ->orWhere('in_stock_uae', 1);
+                })
                 ->with([
                     'category:id,name,slug',
                     'subcategory:id,name,slug',
@@ -168,7 +171,7 @@ class PerformanceCacheService
                     ->select([
                         'id', 'name', 'price', 'promo_price', 'quantity', 'category_id',
                         'subcategory_id', 'product_status', 'image', 'promotion', 'slug',
-                        'start_date', 'end_date',
+                        'start_date', 'end_date', 'wholesale', 'in_stock_uae',
                     ])
                     ->where(function ($query) use ($category) {
                         $query->where('category_id', $category->id)

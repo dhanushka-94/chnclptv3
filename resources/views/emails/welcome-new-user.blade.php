@@ -40,7 +40,6 @@ Our customer support team is here to help:
 - **Phone:** 0112 95 9005
 - **WhatsApp:** +94 777 506 939
 - **Email:** info@chancelaptops.com
-- **Visit Us:** No.12, Maradana Road, Colombo 08
 
 @component('mail::button', ['url' => route('home')])
 Start Shopping

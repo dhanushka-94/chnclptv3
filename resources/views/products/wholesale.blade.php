@@ -67,52 +67,50 @@
                 <p class="text-sm text-gray-700 mb-4">{{ $products->total() }} wholesale products</p>
 
                 @if($products->count() > 0)
-                    <div class="product-grid--3">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
                         @foreach($products as $product)
                             <div class="card card-hover overflow-hidden">
-                                <div class="relative">
-                                    <a href="{{ route('products.show', ['category' => $product->category->slug ?: $product->category->id, 'product' => $product->slug]) }}">
+                                <div class="relative bg-white">
+                                    <a href="{{ route('products.show', ['category' => $product->category->slug ?: $product->category->id, 'product' => $product->slug]) }}"
+                                       class="block aspect-[4/3] overflow-hidden">
                                         <img src="{{ $product->main_image }}"
                                              alt="{{ $product->name }}"
                                              loading="lazy"
-                                             class="w-full h-36 object-cover">
+                                             class="w-full h-full object-contain p-2">
                                     </a>
-                                    <div class="absolute top-1.5 left-1.5 flex flex-col gap-1">
-                                        <span class="inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-500 text-white">Wholesale</span>
-                                        @if($product->is_in_stock_uae)
-                                            <span class="inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold bg-sky-600 text-white">UAE</span>
-                                        @endif
+                                    <div class="absolute top-1 left-1 flex flex-col gap-0.5">
+                                        <span class="inline-flex px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-500 text-white">Wholesale</span>
                                     </div>
-                                    <div class="absolute top-1.5 right-1.5">
+                                    <div class="absolute top-1 right-1">
                                         @if($product->stock_quantity > 0)
-                                            <span class="inline-flex px-1.5 py-0.5 rounded text-[10px] font-medium bg-green-500 text-white">In Stock</span>
+                                            <span class="inline-flex px-1.5 py-0.5 rounded text-[9px] font-medium bg-green-500 text-white">In Stock</span>
                                         @elseif($product->is_in_stock_uae)
-                                            <span class="inline-flex px-1.5 py-0.5 rounded text-[10px] font-bold bg-sky-100 text-sky-800">UAE Stock</span>
+                                            <span class="inline-flex px-1.5 py-0.5 rounded text-[9px] font-bold bg-sky-600 text-white">In Stock UAE</span>
                                         @else
-                                            <span class="inline-flex px-1.5 py-0.5 rounded text-[10px] font-medium bg-red-100 text-red-700">Out of Stock</span>
+                                            <span class="inline-flex px-1.5 py-0.5 rounded text-[9px] font-medium bg-red-100 text-red-700">Out of Stock</span>
                                         @endif
                                     </div>
                                 </div>
-                                <div class="p-3">
-                                    <span class="text-[11px] text-primary-400 font-medium">{{ $product->category->name ?? 'Product' }}</span>
-                                    <h3 class="text-sm font-semibold text-gray-900 mt-0.5 mb-1 line-clamp-2 leading-snug">
+                                <div class="p-2.5">
+                                    <span class="text-[10px] text-primary-400 font-medium">{{ $product->category->name ?? 'Product' }}</span>
+                                    <h3 class="text-xs sm:text-sm font-semibold text-gray-900 mt-0.5 mb-1 line-clamp-2 leading-snug">
                                         <a href="{{ route('products.show', ['category' => $product->category->slug ?: $product->category->id, 'product' => $product->slug]) }}" class="hover:text-primary-400 transition-colors">
                                             {{ $product->name }}
                                         </a>
                                     </h3>
-                                    <p class="text-[11px] font-semibold text-amber-700 mb-1.5">WhatsApp · Min. 5 any products</p>
-                                    <div class="flex items-baseline gap-1.5 mb-2 flex-wrap">
+                                    <p class="text-[10px] font-semibold text-amber-700 mb-1">WhatsApp · Min. 5</p>
+                                    <div class="flex items-baseline gap-1 mb-2 flex-wrap">
                                         @if($product->is_on_sale)
-                                            <span class="text-xs text-gray-500 line-through">LKR {{ number_format($product->price, 2) }}</span>
-                                            <span class="text-base font-bold text-red-600">LKR {{ number_format($product->promo_price, 2) }}</span>
+                                            <span class="text-[10px] text-gray-500 line-through">LKR {{ number_format($product->price, 2) }}</span>
+                                            <span class="text-sm font-bold text-red-600">LKR {{ number_format($product->promo_price, 2) }}</span>
                                         @elseif($product->price > 0)
-                                            <span class="text-base font-bold text-gray-900">LKR {{ number_format($product->price, 2) }}</span>
+                                            <span class="text-sm font-bold text-gray-900">LKR {{ number_format($product->price, 2) }}</span>
                                         @else
-                                            <span class="text-sm font-bold text-red-600">Contact for Price</span>
+                                            <span class="text-xs font-bold text-red-600">Contact for Price</span>
                                         @endif
                                     </div>
                                     <a href="{{ route('products.show', ['category' => $product->category->slug ?: $product->category->id, 'product' => $product->slug]) }}"
-                                       class="btn-primary px-3 py-1.5 text-xs inline-flex">
+                                       class="btn-primary px-2.5 py-1 text-[11px] inline-flex w-full justify-center">
                                         View &amp; Order
                                     </a>
                                 </div>

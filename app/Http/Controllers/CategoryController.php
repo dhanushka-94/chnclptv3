@@ -28,7 +28,6 @@ class CategoryController extends Controller
                   ->orWhere('subcategory_id', $category->id);
         })
         ->where('hide', 0)
-        ->retail()
         ->select(['id', 'name', 'code', 'price', 'promo_price', 'quantity', 'category_id', 'subcategory_id', 'product_status', 'image', 'promotion', 'details', 'slug', 'wholesale', 'in_stock_uae'])
         ->with([
             'category:id,name,slug',
@@ -39,6 +38,17 @@ class CategoryController extends Controller
 
         // Apply attribute filters
         $this->applyAttributeFilters($productsQuery, $request);
+
+        // Availability / type filters (AND when multiple selected)
+        if ($request->boolean('in_stock')) {
+            $productsQuery->where('quantity', '>', 0);
+        }
+        if ($request->boolean('wholesale')) {
+            $productsQuery->where('wholesale', 1);
+        }
+        if ($request->boolean('in_stock_uae')) {
+            $productsQuery->where('in_stock_uae', 1);
+        }
 
         // Apply price range filter
         if ($request->filled('min_price') || $request->filled('max_price')) {
@@ -96,11 +106,15 @@ class CategoryController extends Controller
             // Transform products for JSON response
             $transformedProducts = $products->getCollection()->map(function ($product) {
                 $product->append([
-                    'main_image', 
+                    'main_image',
                     'final_price',
                     'is_on_sale',
                     'stock_quantity',
-                    'slug'
+                    'slug',
+                    'is_wholesale',
+                    'is_in_stock_uae',
+                    'can_add_to_cart',
+                    'cart_restriction_reason',
                 ]);
                 return $product;
             });

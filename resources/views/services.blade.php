@@ -2,7 +2,7 @@
 
 @section('title', 'Service Center - Professional Computer Repair | CHANCE LAPTOPS')
 @section('description', 'Professional computer repair and maintenance services with expert technicians, genuine parts, and comprehensive warranty coverage at Chance Laptops Service Center.')
-@section('keywords', 'computer repair, laptop repair, service center, Chance Laptops, Ragama, Sri Lanka, hardware repair, software installation, virus removal')
+@section('keywords', 'computer repair, laptop repair, service center, Chance Laptops, Sri Lanka, hardware repair, software installation, virus removal')
 
 @section('content')
 <div class="info-page">
@@ -10,7 +10,7 @@
         badge="Service Center"
         title="Professional"
         highlight="Repair Services"
-        description="Expert laptop and computer repair in Ragama — genuine parts, transparent pricing, and warranty on all service work."
+        description="Expert laptop and computer repair — genuine parts, transparent pricing, and warranty on all service work."
     >
         <x-slot:icon>
             <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"/></svg>
@@ -20,13 +20,13 @@
     <section class="info-section info-section--alt -mt-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="info-stat-card">
+                <a href="{{ route('contact-us.index') }}" class="info-stat-card hover:!border-red-300">
                     <div class="info-card__icon mx-auto mb-3">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
                     </div>
-                    <p class="info-stat-card__label">Visit us</p>
-                    <p class="info-stat-card__hint mt-2">296/3/C, Delpe Junction<br>Ragama, Sri Lanka</p>
-                </div>
+                    <p class="info-stat-card__label">Get support</p>
+                    <p class="info-stat-card__hint mt-2">Contact us for repair &amp; service</p>
+                </a>
                 <a href="tel:0764442221" class="info-stat-card hover:!border-red-300">
                     <div class="info-card__icon mx-auto mb-3">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
@@ -297,6 +297,6 @@
     </div>
 </section>
 
-    <x-page-cta title="Ready to get your device fixed?" description="Bring your laptop to our Ragama service center or contact us today." />
+    <x-page-cta title="Ready to get your device fixed?" description="Contact us today for laptop repair and service support." />
 </div>
 @endsection

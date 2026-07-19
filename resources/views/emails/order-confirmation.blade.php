@@ -88,13 +88,6 @@ If you have any questions about your order:
 - **WhatsApp:** +94 777 506 939 (24/7 Support)
 - **Email:** info@chancelaptops.com
 
-**Store Location:**  
-No.12, Maradana Road, Colombo 08
-
-**Business Hours:**  
-Monday - Saturday: 9:00 AM - 7:00 PM  
-Sunday: 10:00 AM - 6:00 PM
-
 Thank you for choosing CHANCE LAPTOPS!
 
 Best regards,  

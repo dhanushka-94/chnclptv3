@@ -30,6 +30,21 @@ class MenuComposer
                     }])
                     ->get();
 
+                // Hide empty subcategories, then hide main categories with no products and no non-empty subs
+                $categories = $categories->map(function ($category) {
+                    $category->setRelation(
+                        'subcategories',
+                        $category->subcategories
+                            ->filter(fn ($sub) => ($sub->subcategory_products_count ?? 0) > 0)
+                            ->values()
+                    );
+
+                    return $category;
+                })->filter(function ($category) {
+                    return ($category->products_count ?? 0) > 0
+                        || $category->subcategories->isNotEmpty();
+                })->values();
+
                 // Apply config-based ordering without touching database
                 try {
                     return \App\Services\CategoryOrderingService::sortCategoriesWithSubcategories($categories);

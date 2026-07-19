@@ -416,6 +416,16 @@ class SmaProduct extends Model
         }
         
         if ($this->stock_quantity <= 0) {
+            if ($this->is_wholesale && $this->is_in_stock_uae) {
+                return 'Wholesale / In Stock UAE — WhatsApp only';
+            }
+            if ($this->is_wholesale) {
+                return 'Wholesale — WhatsApp only';
+            }
+            if ($this->is_in_stock_uae) {
+                return 'In Stock UAE — WhatsApp only';
+            }
+
             return 'Out of stock';
         }
         

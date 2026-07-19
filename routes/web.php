@@ -36,6 +36,15 @@ Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->prefix
     Route::post('/quotations/bulk-action', [App\Http\Controllers\Admin\AdminQuotationController::class, 'bulkAction'])->name('quotations.bulk-action');
     Route::get('/quotations-statistics', [App\Http\Controllers\Admin\AdminQuotationController::class, 'statistics'])->name('quotations.statistics');
 
+    // Homepage hero sliders
+    Route::get('/hero-slides', [App\Http\Controllers\Admin\AdminHeroSlideController::class, 'index'])->name('hero-slides.index');
+    Route::get('/hero-slides/create', [App\Http\Controllers\Admin\AdminHeroSlideController::class, 'create'])->name('hero-slides.create');
+    Route::post('/hero-slides', [App\Http\Controllers\Admin\AdminHeroSlideController::class, 'store'])->name('hero-slides.store');
+    Route::get('/hero-slides/{heroSlide}/edit', [App\Http\Controllers\Admin\AdminHeroSlideController::class, 'edit'])->name('hero-slides.edit');
+    Route::put('/hero-slides/{heroSlide}', [App\Http\Controllers\Admin\AdminHeroSlideController::class, 'update'])->name('hero-slides.update');
+    Route::patch('/hero-slides/{heroSlide}/toggle', [App\Http\Controllers\Admin\AdminHeroSlideController::class, 'toggle'])->name('hero-slides.toggle');
+    Route::delete('/hero-slides/{heroSlide}', [App\Http\Controllers\Admin\AdminHeroSlideController::class, 'destroy'])->name('hero-slides.destroy');
+
     // User Management
     Route::get('/users', [App\Http\Controllers\Admin\AdminUserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [App\Http\Controllers\Admin\AdminUserController::class, 'create'])->name('users.create');

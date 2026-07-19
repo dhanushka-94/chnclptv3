@@ -210,14 +210,10 @@
                 <p class="text-gray-700 mb-4">To cancel your order <strong class="text-white" id="modalOrderNumber"></strong>, please contact our customer service team:</p>
             </div>
             
-            <!-- Shop Information -->
             <div class="mb-6 p-4 bg-red-500/10 border border-red-300/20 rounded-lg">
                 <div class="text-center">
                     <h4 class="font-bold text-gray-900 text-lg mb-2">CHANCE LAPTOPS</h4>
-                    <div class="text-sm text-gray-700 space-y-1">
-                        <div>296/3/C, Delpe Junction, Ragama</div>
-                        <div>Sri Lanka</div>
-                    </div>
+                    <p class="text-sm text-gray-700">Contact our team to request cancellation</p>
                 </div>
             </div>
 

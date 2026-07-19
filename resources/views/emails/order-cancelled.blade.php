@@ -73,13 +73,6 @@ Our team can help you find similar or better alternatives:
 - **WhatsApp:** +94 777 506 939 (Chat with our experts)
 - **Email:** info@chancelaptops.com
 
-### Visit Our Store
-Get hands-on experience with our products:
-
-**CHANCE LAPTOPS Showroom**  
-No.12, Maradana Road, Colombo 08  
-**Hours:** Monday-Saturday 9AM-7PM, Sunday 10AM-6PM
-
 @component('mail::panel')
 **Why Choose CHANCE LAPTOPS?**
 

@@ -14,21 +14,32 @@ class CategoryComposer
             'menu_categories_top12',
             PerformanceCacheService::CATEGORY_CACHE_DURATION,
             function () {
-                return \App\Models\SmaCategory::where(function ($q) {
+                $categories = \App\Models\SmaCategory::where(function ($q) {
                     $q->whereNull('parent_id')
                         ->orWhere('parent_id', '')
                         ->orWhere('parent_id', 0);
                 })
                     ->with(['subcategories' => function ($query) {
-                        $query->withCount(['subcategoryProducts'])
-                            ->having('subcategory_products_count', '>', 0)
+                        $query->withCount(['subcategoryProducts as subcategory_products_count'])
                             ->orderBy('name');
                     }])
                     ->withCount('products')
-                    ->having('products_count', '>', 0)
                     ->orderBy('products_count', 'desc')
-                    ->take(12)
                     ->get();
+
+                return $categories->map(function ($category) {
+                    $category->setRelation(
+                        'subcategories',
+                        $category->subcategories
+                            ->filter(fn ($sub) => ($sub->subcategory_products_count ?? 0) > 0)
+                            ->values()
+                    );
+
+                    return $category;
+                })->filter(function ($category) {
+                    return ($category->products_count ?? 0) > 0
+                        || $category->subcategories->isNotEmpty();
+                })->take(12)->values();
             }
         );
 

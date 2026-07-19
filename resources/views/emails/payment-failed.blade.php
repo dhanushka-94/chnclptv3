@@ -47,7 +47,7 @@ Retry Payment
 **Coming Soon** — Bank account details for Chance Laptops (Pvt) Ltd are not published yet.
 Please contact us at info@chancelaptops.com to arrange payment for order {{ $order->order_number }}.
 
-### Option 3: Visit Our Store / Contact Us
+### Option 3: Contact Us
 **Chance Laptops (Pvt) Ltd**  
 Contact our team for current payment options.
 

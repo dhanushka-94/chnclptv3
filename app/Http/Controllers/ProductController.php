@@ -11,7 +11,6 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $query = SmaProduct::active()
-            ->retail()
             ->select(['id', 'name', 'code', 'price', 'promo_price', 'quantity', 'category_id', 'product_status', 'image', 'promotion', 'details', 'slug', 'wholesale', 'in_stock_uae'])
             ->with([
                 'category:id,name,slug',
@@ -35,6 +34,16 @@ class ProductController extends Controller
                   ->orWhere('details', 'like', "%{$searchTerm}%")
                   ->orWhere('code', 'like', "%{$searchTerm}%");
             });
+        }
+
+        if ($request->boolean('in_stock')) {
+            $query->where('quantity', '>', 0);
+        }
+        if ($request->boolean('wholesale')) {
+            $query->where('wholesale', 1);
+        }
+        if ($request->boolean('in_stock_uae')) {
+            $query->where('in_stock_uae', 1);
         }
 
         // Apply stock-priority sorting first (in-stock first, low stock middle, out-of-stock last)
@@ -100,7 +109,6 @@ class ProductController extends Controller
 
         // Build search query
         $query = SmaProduct::active()
-            ->retail()
             ->where(function ($q) {
                 $q->where('quantity', '>', 0)
                   ->orWhere('in_stock_uae', 1);
@@ -288,7 +296,29 @@ class ProductController extends Controller
         }
 
         $products = $query->paginate(12)->withQueryString();
-        $categories = \App\Services\PerformanceCacheService::getNavigationCategories();
+
+        // Sidebar: only categories that have available wholesale products
+        $wholesaleCategoryIds = SmaProduct::active()
+            ->wholesale()
+            ->where(function ($q) {
+                $q->where('quantity', '>', 0)
+                  ->orWhere('in_stock_uae', 1);
+            })
+            ->distinct()
+            ->pluck('category_id')
+            ->filter()
+            ->unique()
+            ->values();
+
+        $categories = SmaCategory::whereIn('id', $wholesaleCategoryIds)
+            ->select(['id', 'name', 'slug'])
+            ->get();
+
+        try {
+            $categories = \App\Services\CategoryOrderingService::sortCategories($categories);
+        } catch (\Exception $e) {
+            $categories = $categories->sortBy('name')->values();
+        }
 
         return view('products.wholesale', compact('products', 'categories'));
     }

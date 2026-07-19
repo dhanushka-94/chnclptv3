@@ -155,21 +155,31 @@
                                         >
                                         
                                         <!-- Category Badge -->
-                                        <div class="absolute top-3 left-3">
+                                        <div class="absolute top-3 left-3 flex flex-col gap-1">
                                             <div class="bg-primary-500/90 text-black text-xs font-medium px-2 py-1 rounded-lg backdrop-blur-sm">
                                                 {{ $product->category ? $product->category->name : 'Uncategorized' }}
                                             </div>
-                                    </div>
+                                            @if($product->is_wholesale)
+                                                <span class="bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow">Wholesale</span>
+                                            @endif
+                                            @if($product->is_on_sale)
+                                                <span class="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow">Sale</span>
+                                            @endif
+                                        </div>
                                     
                                     <!-- Stock Status -->
                                     <div class="absolute top-3 right-3">
                                         @if($product->status && in_array($product->status->status_name, ['Coming Soon', 'Pre Order']))
-                                            <div class="bg-red-500/90 text-white text-xs font-medium px-2 py-1 rounded-lg backdrop-blur-sm">
+                                            <div class="bg-violet-600/90 text-white text-xs font-medium px-2 py-1 rounded-lg backdrop-blur-sm">
                                                 {{ $product->status->status_name }}
                                             </div>
                                         @elseif($product->stock_quantity > 0)
                                             <div class="bg-green-500/90 text-white text-xs font-medium px-2 py-1 rounded-lg backdrop-blur-sm">
                                                 In Stock
+                                            </div>
+                                        @elseif($product->is_in_stock_uae)
+                                            <div class="bg-sky-600/90 text-white text-xs font-medium px-2 py-1 rounded-lg backdrop-blur-sm">
+                                                In Stock UAE
                                             </div>
                                         @else
                                             <div class="bg-red-500/90 text-white text-xs font-medium px-2 py-1 rounded-lg backdrop-blur-sm">

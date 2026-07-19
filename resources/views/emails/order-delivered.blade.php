@@ -59,8 +59,7 @@ Register Products
 
 ### Warranty Service
 - **Coverage:** As per manufacturer terms
-- **Service Center:** No.12, Maradana Road, Colombo 08
-- **Hours:** Monday-Saturday 9AM-7PM
+- **Support:** Contact us by phone, WhatsApp, or email to arrange service
 
 @component('mail::panel')
 **Feedback Request** ⭐

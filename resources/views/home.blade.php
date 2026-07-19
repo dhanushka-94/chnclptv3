@@ -16,97 +16,36 @@
     </div>
 </div>
 
-<!-- Top showcase: categories + deals (X-MOBILE style) -->
-<section class="home-showcase bg-white border-b border-slate-100">
+<!-- Promotions -->
+<section class="home-promotions bg-white border-b border-slate-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
-        @if($categories->isNotEmpty())
-            <div class="home-category-rail" role="navigation" aria-label="Shop by category">
-                @foreach($categories as $category)
-                    <a href="{{ route('categories.show', $category->slug ?: $category->id) }}"
-                       class="home-category-circle group">
-                        <div class="home-category-circle__ring">
-                            <img
-                                src="{{ $category->image_url }}"
-                                alt="{{ $category->name }}"
-                                class="home-category-circle__img"
-                                loading="lazy"
-                            >
-                        </div>
-                        <span class="home-category-circle__name">{{ $category->name }}</span>
-                        <span class="home-category-circle__count">{{ number_format($category->active_products_count) }} Products</span>
-                    </a>
+        <div class="home-section-header">
+            <div>
+                <h2 class="home-section-header__title">Promotions</h2>
+                <p class="home-section-header__meta">Special deals &amp; discounted products</p>
+            </div>
+            <a href="{{ route('promotions.index') }}" class="home-section-header__more">
+                View all
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+
+        @if($promoDeals->isNotEmpty())
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-5">
+                @foreach($promoDeals as $product)
+                    <x-home-product-card :product="$product" />
                 @endforeach
             </div>
+        @else
+            <div class="text-center py-10">
+                <p class="text-slate-600 mb-4">No promotions available right now.</p>
+                <a href="{{ route('products.index') }}" class="info-btn-primary inline-flex items-center gap-2">
+                    Browse products
+                </a>
+            </div>
         @endif
-
-        <div class="home-promo-grid mt-8 md:mt-10">
-            @forelse($promoDeals as $deal)
-                @php
-                    $dealUrl = $deal->category
-                        ? route('products.show', [
-                            'category' => $deal->category->slug ?: $deal->category->id,
-                            'product' => $deal->slug ?: $deal->id,
-                        ])
-                        : route('promotions.index');
-                @endphp
-                <a href="{{ $dealUrl }}" class="home-promo-card home-promo-card--deal group">
-                    <img src="{{ $deal->main_image }}" alt="{{ $deal->name }}" class="home-promo-card__bg" loading="lazy">
-                    <div class="home-promo-card__overlay"></div>
-                    <div class="home-promo-card__content">
-                        <span class="home-promo-card__tag">Hot Deal</span>
-                        <h2 class="home-promo-card__title">{{ Str::limit($deal->name, 42) }}</h2>
-                        <p class="home-promo-card__price">From LKR {{ number_format($deal->final_price, 0) }}</p>
-                        <span class="home-promo-card__cta">Shop now</span>
-                    </div>
-                </a>
-            @empty
-                <a href="{{ route('promotions.index') }}" class="home-promo-card home-promo-card--fallback home-promo-card--brand group">
-                    <div class="home-promo-card__content">
-                        <span class="home-promo-card__tag">Promotions</span>
-                        <h2 class="home-promo-card__title">Exclusive deals &amp; discounts</h2>
-                        <span class="home-promo-card__cta">View deals</span>
-                    </div>
-                </a>
-                <a href="{{ route('categories.index') }}" class="home-promo-card home-promo-card--fallback home-promo-card--indigo group">
-                    <div class="home-promo-card__content">
-                        <span class="home-promo-card__tag">Catalog</span>
-                        <h2 class="home-promo-card__title">Browse all categories</h2>
-                        <span class="home-promo-card__cta">Shop now</span>
-                    </div>
-                </a>
-                <a href="{{ route('about-us.index') }}" class="home-promo-card home-promo-card--fallback home-promo-card--cyan group">
-                    <div class="home-promo-card__content">
-                        <span class="home-promo-card__tag">About</span>
-                        <h2 class="home-promo-card__title">Why shop with Chance Laptops</h2>
-                        <span class="home-promo-card__cta">Learn more</span>
-                    </div>
-                </a>
-                <a href="{{ route('contact-us.index') }}" class="home-promo-card home-promo-card--fallback home-promo-card--slate group">
-                    <div class="home-promo-card__content">
-                        <span class="home-promo-card__tag">Support</span>
-                        <h2 class="home-promo-card__title">Get help choosing the right product</h2>
-                        <span class="home-promo-card__cta">Contact us</span>
-                    </div>
-                </a>
-            @endforelse
-
-            @if($promoDeals->count() > 0 && $promoDeals->count() < 4)
-                @php $fillers = [
-                    ['route' => 'promotions.index', 'tag' => 'Deals', 'title' => 'View all promotions', 'cta' => 'See more', 'class' => 'home-promo-card--brand'],
-                    ['route' => 'categories.index', 'tag' => 'Shop', 'title' => 'Explore full catalog', 'cta' => 'Browse', 'class' => 'home-promo-card--indigo'],
-                    ['route' => 'about-us.index', 'tag' => 'About', 'title' => 'Why shop with Chance Laptops', 'cta' => 'Learn more', 'class' => 'home-promo-card--cyan'],
-                ]; @endphp
-                @foreach(array_slice($fillers, 0, 4 - $promoDeals->count()) as $filler)
-                    <a href="{{ route($filler['route']) }}" class="home-promo-card home-promo-card--fallback {{ $filler['class'] }} group">
-                        <div class="home-promo-card__content">
-                            <span class="home-promo-card__tag">{{ $filler['tag'] }}</span>
-                            <h2 class="home-promo-card__title">{{ $filler['title'] }}</h2>
-                            <span class="home-promo-card__cta">{{ $filler['cta'] }}</span>
-                        </div>
-                    </a>
-                @endforeach
-            @endif
-        </div>
     </div>
 </section>
 

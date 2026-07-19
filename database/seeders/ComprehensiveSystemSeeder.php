@@ -153,7 +153,7 @@ class ComprehensiveSystemSeeder extends Seeder
             'Colombo', 'Kandy', 'Galle', 'Jaffna', 'Negombo', 'Anuradhapura', 'Ratnapura', 
             'Batticaloa', 'Matara', 'Kurunegala', 'Trincomalee', 'Badulla', 'Kalutara',
             'Puttalam', 'Kegalle', 'Ampara', 'Hambantota', 'Monaragala', 'Polonnaruwa',
-            'Ragama', 'Maharagama', 'Kelaniya', 'Moratuwa', 'Wattala', 'Panadura'
+            'Maharagama', 'Kelaniya', 'Moratuwa', 'Wattala', 'Panadura', 'Negombo'
         ];
         
         for ($i = 1; $i <= 150; $i++) {

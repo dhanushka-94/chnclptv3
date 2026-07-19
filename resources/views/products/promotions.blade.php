@@ -112,7 +112,9 @@
                                     @if($product->stock_quantity > 0)
                                         <span class="bg-green-500/90 text-white text-[10px] font-medium px-1.5 py-0.5 rounded">In Stock</span>
                                     @elseif($product->is_in_stock_uae)
-                                        <span class="bg-sky-600 text-white text-[10px] font-medium px-1.5 py-0.5 rounded">UAE</span>
+                                        <span class="bg-sky-600 text-white text-[10px] font-medium px-1.5 py-0.5 rounded">In Stock UAE</span>
+                                    @else
+                                        <span class="bg-red-500/90 text-white text-[10px] font-medium px-1.5 py-0.5 rounded">Out of Stock</span>
                                     @endif
                                 </div>
                             </div>
@@ -132,15 +134,25 @@
                             </div>
                         </a>
                                 <div class="px-3 pb-3 pt-0">
-                                    <x-add-to-cart-button
-                                        :product-id="$product->id"
-                                        handler="addToCartFromPromo"
-                                        :product-name="$product->name"
-                                        :disabled="!$product->can_add_to_cart"
-                                        :reason="$product->cart_restriction_reason ?: 'Unavailable'"
-                                        :sale="true"
-                                        size="sm"
-                                    />
+                                    @if($product->can_add_to_cart)
+                                        <x-add-to-cart-button
+                                            :product-id="$product->id"
+                                            handler="addToCartFromPromo"
+                                            :product-name="$product->name"
+                                            :disabled="false"
+                                            :sale="true"
+                                            size="sm"
+                                        />
+                                    @else
+                                        <a href="{{ route('products.show', ['category' => $product->category->slug ?: $product->category->id, 'product' => $product->slug]) }}"
+                                           class="block w-full text-center text-xs font-semibold rounded-lg py-2.5 {{ ($product->is_wholesale || $product->is_in_stock_uae) ? 'bg-sky-600 text-white hover:bg-sky-700' : 'bg-gray-200 text-gray-600' }}">
+                                            @if($product->is_wholesale || $product->is_in_stock_uae)
+                                                View · WhatsApp purchase
+                                            @else
+                                                {{ $product->cart_restriction_reason ?: 'Unavailable' }}
+                                            @endif
+                                        </a>
+                                    @endif
                                 </div>
                         </div>
                     @endforeach
