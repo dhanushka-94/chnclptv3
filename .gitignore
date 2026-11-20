@@ -41,3 +41,12 @@ yarn-error.log
 
 # Hot reload
 /public/hot
+
+# Local clutter / backups (never commit)
+*.zip
+*.rar
+*.7z
+*.sql
+/external_resources/
+HERO_SLIDER_INFO.md
+*.md.bak
