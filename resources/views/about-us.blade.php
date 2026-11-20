@@ -10,56 +10,55 @@
         badge="About Our Company"
         title="About"
         highlight="CHANCE LAPTOPS"
-        description="Serving Sri Lanka's computer needs since 2008 — quality products, expert repair, and customer service you can trust."
+        description="Superior Quality · Lasting Value · Tested & Trusted — creating long-term value for our stakeholders worldwide."
     >
         <x-slot:icon>
             <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </x-slot:icon>
     </x-page-hero>
 
-<!-- Vision & Mission Section -->
+<!-- About Us -->
+<section class="info-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="info-card max-w-4xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">About Us</h2>
+            <div class="space-y-4 text-gray-700 leading-relaxed">
+                <p>Chance Laptops has grown from an online-based business in the United Arab Emirates, serving African and South Asian markets, into a trusted and reliable name in the computer retail and wholesale industry. Over the years, we have proudly served students, professionals, businesses, and government institutions by delivering high-quality IT products, competitive pricing, and exceptional customer service.</p>
+                <p>Expanding our global presence, Chance Laptops continues to strengthen its operations in both the UAE and Sri Lanka, positioning itself as a leading international IT solutions provider. In addition to our retail services, we are a dedicated wholesale distributor, supplying a wide range of laptops and IT products to clients across African, Middle Eastern, and South Asian countries.</p>
+                <p>With a strong global network and an efficient supply chain, we ensure our partners receive premium-quality products at the best possible value. Our commitment to staying ahead with the latest technology enables us to meet the evolving demands of customers worldwide.</p>
+                <p>At Chance Laptops, we remain guided by our core values — trust, quality, and customer satisfaction — as we continue to grow and build long-term partnerships across the globe.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Purpose, Mission, Vision, Goal, Values -->
 <section class="info-section info-section--alt">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Vision -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div class="info-card">
-                <div class="flex items-center space-x-4 mb-6">
-                    <div class="w-16 h-16 bg-red-500/20 rounded-lg flex items-center justify-center">
-                        <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h2 class="text-2xl font-bold text-red-400 mb-1">අපේ දැක්ම</h2>
-                        <h3 class="text-xl font-semibold text-slate-900">Our Vision</h3>
-                    </div>
-                </div>
-                
-                <div class="space-y-4">
-                    <p class="text-gray-700 text-lg leading-relaxed">ලංකාවේ සියලු දෙනා හට පරිගණකයක් ලබා දීම</p>
-                    <p class="text-gray-600 leading-relaxed">Providing a computer to everyone in Sri Lanka</p>
-                </div>
+                <h3 class="text-xl font-semibold text-slate-900 mb-3">Group Purpose</h3>
+                <p class="text-gray-700 leading-relaxed">To drive change for a better world</p>
             </div>
-
-            <!-- Mission -->
             <div class="info-card">
-                <div class="flex items-center space-x-4 mb-6">
-                    <div class="w-16 h-16 bg-red-500/20 rounded-lg flex items-center justify-center">
-                        <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h2 class="text-2xl font-bold text-red-500 mb-1">අපේ මෙහෙවර</h2>
-                        <h3 class="text-xl font-semibold text-slate-900">Our Mission</h3>
-                    </div>
-                </div>
-                
-                <div class="space-y-4">
-                    <p class="text-gray-700 text-lg leading-relaxed">ගුණාත්මකභාවයෙන් යුතු පරිගණක හා පරිගණක උපාංග අලවිය හා අලෙවියෙන් පසු විශිෂ්ඨ සේවාවක් ලබාදීම</p>
-                    <p class="text-gray-600 leading-relaxed">Providing excellent after sales and sales quality computer and computer peripherals</p>
-                </div>
+                <h3 class="text-xl font-semibold text-slate-900 mb-3">Brand Positioning</h3>
+                <p class="text-gray-700 leading-relaxed">Superior Quality | Lasting Value | Tested &amp; Trusted</p>
+            </div>
+            <div class="info-card">
+                <h3 class="text-xl font-semibold text-slate-900 mb-3">Mission</h3>
+                <p class="text-gray-700 leading-relaxed">To create long-term value for all our stakeholders</p>
+            </div>
+            <div class="info-card">
+                <h3 class="text-xl font-semibold text-slate-900 mb-3">Vision</h3>
+                <p class="text-gray-700 leading-relaxed">Chance strategy will focus on achieving profitable growth and attractive returns to our stakeholders, while managing the transition from a very successful past and adapting to the new IT industry needs and market changes.</p>
+            </div>
+            <div class="info-card">
+                <h3 class="text-xl font-semibold text-slate-900 mb-3">Goal</h3>
+                <p class="text-gray-700 leading-relaxed">To be a reputable and well-respected brand to our Stakeholders while evolving as one of the most efficient provider of IT solutions in our chosen markets.</p>
+            </div>
+            <div class="info-card">
+                <h3 class="text-xl font-semibold text-slate-900 mb-3">Values</h3>
+                <p class="text-gray-700 leading-relaxed">Integrity | Innovation | Trusted Values</p>
             </div>
         </div>
     </div>
@@ -269,15 +268,6 @@
                 <div class="space-y-4">
                     <p class="text-gray-700">ඔබ shop එකට පැමිණිය හැකි දුරකින් නම්, එය අප වෙත රැගෙන එමින් සේවාව ගත හැක</p>
                     <p class="text-gray-600 text-sm">If you are within distance to visit the shop, bring your device for service</p>
-                    
-                    <div class="mt-6 p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
-                        <p class="text-red-400 font-medium text-sm">
-                            Warranty machines arriving after 4 PM cannot be serviced same day
-                        </p>
-                        <p class="text-orange-300 text-xs mt-1">
-                            සවස 4න් පසු පැමිණෙන warranty machine සඳහා එදිනම warranty ලබා ගැනීමට නොහැකි
-                        </p>
-                    </div>
                 </div>
             </div>
 
@@ -296,12 +286,11 @@
                     <div class="bg-gray-100 rounded-lg p-4">
                         <h4 class="text-gray-900 font-medium mb-2">Send to:</h4>
                         <div class="text-gray-700 text-sm space-y-1">
-                            <p><strong>Chance Laptops</strong></p>
-                            <p class="text-gray-600">Contact us before sending courier items:</p>
+                            <p><strong>CHANCE LAPTOPS PVT LTD</strong></p>
+                            <p>No 09, Danthure Road, Pilimathalawa</p>
                             <div class="mt-3 space-y-1">
-                                <p>076 444 222 1</p>
-                                <p>011 296 066 0</p>
-                                <p>WhatsApp: 0764442221</p>
+                                <p>WhatsApp: <a href="https://wa.me/{{ config('products.whatsapp_number', '94713043700') }}" class="text-red-600 hover:underline">{{ config('products.whatsapp_display', '+94 71 304 3700') }}</a></p>
+                                <p>Landline: <a href="tel:+{{ config('products.landline_number', '94812575733') }}" class="text-red-600 hover:underline">{{ config('products.landline_display', '+94 81 257 5733') }}</a></p>
                             </div>
                         </div>
                     </div>

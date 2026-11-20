@@ -101,7 +101,7 @@
             <div class="flex flex-col sm:flex-row justify-between items-center py-2.5 text-sm">
                 <!-- Contact Information -->
                 <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-4 md:space-x-6 text-gray-700 text-center sm:text-left w-full sm:w-auto mb-2 sm:mb-0">
-                    <a href="https://wa.me/{{ config('products.whatsapp_number', '971522306476') }}"
+                    <a href="https://wa.me/{{ config('products.whatsapp_number', '94713043700') }}"
                        target="_blank"
                        rel="noopener noreferrer"
                        class="flex items-center justify-center sm:justify-start space-x-2 group cursor-pointer min-h-[44px] py-1">
@@ -112,7 +112,22 @@
                         </div>
                         <div>
                             <span class="text-sm font-medium text-gray-700 group-hover:text-[#25D366] transition-colors block leading-tight">WhatsApp</span>
-                            <span class="text-xs text-gray-500">{{ config('products.whatsapp_display', '+971 52 230 6476') }}</span>
+                            <span class="text-xs text-gray-500">{{ config('products.whatsapp_display', '+94 71 304 3700') }}</span>
+                        </div>
+                    </a>
+                    
+                    <div class="hidden sm:block w-px h-5 bg-red-500/20"></div>
+
+                    <a href="tel:+{{ config('products.landline_number', '94812575733') }}"
+                       class="flex items-center justify-center sm:justify-start space-x-2 group cursor-pointer min-h-[44px] py-1">
+                        <div class="w-9 h-9 sm:w-8 sm:h-8 bg-red-500/10 rounded-lg flex items-center justify-center group-hover:bg-red-500/20 transition-colors flex-shrink-0">
+                            <svg class="w-5 h-5 sm:w-4 sm:h-4 text-red-400 group-hover:text-red-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-sm font-medium text-gray-700 group-hover:text-red-400 transition-colors block leading-tight">Landline</span>
+                            <span class="text-xs text-gray-500">{{ config('products.landline_display', '+94 81 257 5733') }}</span>
                         </div>
                     </a>
                     
@@ -143,7 +158,7 @@
                     <div class="flex items-center space-x-1.5 sm:space-x-2">
                         <span class="text-gray-500 text-xs hidden lg:inline mr-1">Follow:</span>
                         <div class="flex space-x-1.5 sm:space-x-2">
-                            <a href="https://www.facebook.com/" 
+                            <a href="{{ config('products.facebook_url') }}" 
                                target="_blank" 
                                rel="noopener noreferrer"
                                class="w-7 h-7 bg-gray-100 hover:bg-[#1877f2] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 border border-gray-300/50 hover:border-[#1877f2]"
@@ -161,7 +176,7 @@
                                     <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                                 </svg>
                             </a>
-                            <a href="https://www.tiktok.com/" 
+                            <a href="{{ config('products.tiktok_url') }}" 
                                target="_blank" 
                                rel="noopener noreferrer"
                                class="w-7 h-7 bg-gray-100 hover:bg-slate-50 hover:border-white rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 border border-gray-300/50"
@@ -735,7 +750,7 @@
                         <p class="text-gray-600 text-sm mb-3 font-medium">Follow Us</p>
                         <div class="flex space-x-3">
                             <!-- Facebook -->
-                            <a href="https://www.facebook.com/" 
+                            <a href="{{ config('products.facebook_url') }}" 
                                target="_blank" 
                                rel="noopener noreferrer"
                                class="social-icon-btn hover:bg-[#1877f2] hover:text-white hover:border-[#1877f2]"
@@ -755,7 +770,7 @@
                                 </svg>
                             </a>
                             <!-- TikTok -->
-                            <a href="https://www.tiktok.com/" 
+                            <a href="{{ config('products.tiktok_url') }}" 
                                target="_blank" 
                                rel="noopener noreferrer"
                                class="social-icon-btn hover:bg-slate-900 hover:text-white hover:border-slate-900"
@@ -819,11 +834,26 @@
                             </div>
                             <div class="text-gray-600 text-sm">
                                 <div class="font-medium text-gray-700 mb-1">WhatsApp</div>
-                                <a href="https://wa.me/{{ config('products.whatsapp_number', '971522306476') }}"
+                                <a href="https://wa.me/{{ config('products.whatsapp_number', '94713043700') }}"
                                    target="_blank"
                                    rel="noopener noreferrer"
                                    class="hover:text-[#25D366] transition-colors font-semibold text-slate-800">
-                                    {{ config('products.whatsapp_display', '+971 52 230 6476') }}
+                                    {{ config('products.whatsapp_display', '+94 71 304 3700') }}
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Landline -->
+                        <div class="footer-contact-card">
+                            <div class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                </svg>
+                            </div>
+                            <div class="text-gray-600 text-sm">
+                                <div class="font-medium text-gray-700 mb-1">Landline</div>
+                                <a href="tel:+{{ config('products.landline_number', '94812575733') }}" class="hover:text-red-400 transition-colors font-semibold text-slate-800">
+                                    {{ config('products.landline_display', '+94 81 257 5733') }}
                                 </a>
                             </div>
                         </div>
@@ -850,9 +880,8 @@
                             </div>
                             <div class="text-gray-600 text-sm">
                                 <div class="font-medium text-gray-700 mb-1">Business Hours</div>
-                                <div>Mon-Fri: <span class="text-red-400">9:00 AM - 6:30 PM</span></div>
-                                <div>Sat-Sun: <span class="text-red-400">9:00 AM - 5:30 PM</span></div>
-                                <div class="text-xs text-gray-500 mt-1">Closed on Poya Days</div>
+                                <div><span class="text-red-400">08:30 AM – 05:30 PM</span></div>
+                                <div class="text-xs text-gray-500 mt-1">Open all days</div>
                             </div>
                         </div>
                     </div>
@@ -1476,12 +1505,12 @@
         });
     </script>
     <!-- Floating WhatsApp (bottom-right) -->
-    <a href="https://wa.me/{{ config('products.whatsapp_number', '971522306476') }}"
+    <a href="https://wa.me/{{ config('products.whatsapp_number', '94713043700') }}"
        target="_blank"
        rel="noopener noreferrer"
        class="floating-whatsapp"
        aria-label="Chat on WhatsApp"
-       title="Chat on WhatsApp {{ config('products.whatsapp_display', '+971 52 230 6476') }}">
+       title="Chat on WhatsApp {{ config('products.whatsapp_display', '+94 71 304 3700') }}">
         <svg class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
         </svg>

@@ -161,8 +161,8 @@ class QuotationController extends Controller
             'tax_amount' => (float) $quotation->tax_amount,
             'total' => (float) $quotation->total_amount,
             'notes' => $quotation->notes ?? '',
-            'whatsapp_display' => config('products.whatsapp_display', '+971 52 230 6476'),
-            'whatsapp_number' => config('products.whatsapp_number', '971522306476'),
+            'whatsapp_display' => config('products.whatsapp_display', '+94 71 304 3700'),
+            'whatsapp_number' => config('products.whatsapp_number', '94713043700'),
             'email' => 'info@chancelaptops.com',
             'logo_src' => $forPdf && is_file($logoFs)
                 ? 'file:///' . str_replace('\\', '/', $logoFs)

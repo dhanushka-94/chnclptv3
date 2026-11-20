@@ -6,8 +6,8 @@
 
 @section('content')
 @php
-    $waNumber = config('products.whatsapp_number', '971522306476');
-    $waDisplay = config('products.whatsapp_display', '+971 52 230 6476');
+    $waNumber = config('products.whatsapp_number', '94713043700');
+    $waDisplay = config('products.whatsapp_display', '+94 71 304 3700');
     $waUrl = 'https://wa.me/'.$waNumber;
 @endphp
 <div class="info-page">

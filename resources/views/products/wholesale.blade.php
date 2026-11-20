@@ -16,7 +16,7 @@
             </div>
             <div class="sm:w-auto w-full sm:max-w-xs flex-shrink-0">
                 <x-whatsapp-enquiry-button
-                    :url="'https://wa.me/'.config('products.whatsapp_number', '971522306476').'?text='.rawurlencode('Hi Chance Laptops, I am interested in wholesale products. Minimum order is '.config('products.wholesale_min_units', 5).' units across any products.')"
+                    :url="'https://wa.me/'.config('products.whatsapp_number', '94713043700').'?text='.rawurlencode('Hi Chance Laptops, I am interested in wholesale products. Minimum order is '.config('products.wholesale_min_units', 5).' units across any products.')"
                     label="WhatsApp — Wholesale"
                     tone="amber"
                 />
